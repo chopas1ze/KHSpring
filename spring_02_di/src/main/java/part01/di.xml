@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- 
+스프링 환경설정
+1 xml
+2 annotation(어노테이션)
+
+환경설정에서 사용되는 상수정의 : properties확장자에 저장
+ -->
+
+<!-- ServiceOracleImp svc = new ServiceOracleImp(); -->
+<!-- <bean id="svc" class="part01.ServiceOracleImp"/> -->
+<bean id="svc" class="part01.ServiceMysqlImp"/>
+</beans>

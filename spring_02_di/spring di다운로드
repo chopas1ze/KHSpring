@@ -1,0 +1,18 @@
+프로젝트 생성시 new -> spring legacy project에서 di모듈을 다운받는다.
+
+간혹 갑자기 클래스가 없다면서 실행이안된다면 자기가 알아서 maven 의 di모듈이 지워져 있을수 있다.
+그럴땐 껏다 켜보고 안되면 다시 di모듈을 받아야한다.
+
+
+
+http://mvnrepository.org
+mybatis,tomcat 등 모듈을 모아둔 사이트.
+pom.xml 에 디펜더시에 등록해놓으면 메이븐사이트에서 알아서 다운받아진다.
+디펜더시에 등록할때는 dependencies 제일 아래쪽에 추가한다. 왜냐하면 
+dependencies 위에서부터 있는지 검색하기때문에 오류가 발생한다. 
+추가하면 Maven Dependencies에 파일이 추가된다.
+오라클은 maven에서 jar파일을 지원하지않기 때문에 직접 jar파일을 추가한다.
+
+
+sts 4.0버전에서는 gradle방식(스크립트를 이용)으로 다운로드한다.
+
