@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- List<Integer> list = new ArrayList<Integer>(); 
+		list.add(new Integer(10)); 
+		list.add(new Integer(20)); 
+		list.add(new Integer(30)); 
+		ServiceImp svc1=new ServiceImp(); svc1.setList(list); -->
+
+	<bean id="svc1" class="part04_collection.ServiceImp">
+		<property name="list">
+			<list>
+				<value>10</value>
+				<value>20</value>
+				<value>30</value>
+			</list>
+		</property>
+		
+	</bean>
+
+	<!-- Map<String,Integer> map = new LinkedHashMap<String,Integer>(); 
+		map.put("kim",1000); 
+		map.put("park",3000); 
+		ServiceImp svc2 = new ServiceImp(); 
+		svc2.setMap(map); -->
+
+	<bean id="svc2" class="part04_collection.ServiceImp">
+		<property name="map">
+			<map>
+				<entry>
+					<key>
+						<value>kim</value>
+					</key>
+					<value>1000</value>
+				</entry>
+
+				<entry>
+					<key>
+					<value>park</value>
+					</key>
+					<value>3000</value>
+				</entry>
+
+			</map>
+		</property>
+	</bean>
+	
+	<!-- 
+	Set<String> set = new LinkedHashSet<String>();
+	set.add("java");
+	set.add("jsp");
+	ServiceImp svc3=new ServiceImp();
+	svc3.setSet(set);
+	 -->
+<bean id="svc3" class="part04_collection.ServiceImp">
+	<property name="set">
+		<set>
+			<value>java</value>
+			<value>jsp</value>
+		</set>
+	</property>
+</bean>
+
+<!-- 
+Properties prop = new Properties();
+prop.setProperty("ip","127.0.0.1");
+prop.setProperty("port","80");
+ServiceImp svc4 = new ServiceImp();
+svc4.setProp(prop);
+ -->
+
+<bean id="svc4" class="part04_collection.ServiceImp">
+	<property name="prop">
+		<props>
+			<prop key="ip">127.0.0.1</prop>
+			<prop key="port">80</prop>
+		</props>
+	</property>
+</bean>
+
+
+</beans>

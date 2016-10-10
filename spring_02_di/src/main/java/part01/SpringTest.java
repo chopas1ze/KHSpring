@@ -1,7 +1,10 @@
 package part01;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 public class SpringTest {
 
@@ -20,9 +23,9 @@ public class SpringTest {
 		
 		//ApplicationContext 컨테이너(클래스) 에 di.xml의 bean 들을 관리하고 생성한다. 
 		ApplicationContext context = new ClassPathXmlApplicationContext("part01/di.xml");
-		
-		//Service svc =(Service)context.getBean("svc");
-		//svc.prn();
+		//getBean의 리턴 타입은 오브젝트이기떄문 Service 로 다운캐스트한다.
+		Service svc =(Service)context.getBean("svc");
+		svc.prn();
 		
 	}//end main()
 
