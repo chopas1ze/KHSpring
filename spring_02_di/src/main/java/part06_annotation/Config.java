@@ -30,5 +30,9 @@ public class Config {
 		return new ServiceImp(user());
 	}
 	
+	@Bean(name="ss")
+	public ServiceImp serviceImp(){
+		return new ServiceImp(user());
+	}
 
 }//end class
