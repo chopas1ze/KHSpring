@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+<!-- 관계를 설정하는것을 어드바이스라고 부르고 aop를 사용한다 -->
+<!-- Aspect-공통관심사항 빈 선언 -->
+<bean id="common" class="part03_exam.LogginAspect"/>
+
+<!-- Target-핵심관심사항 빈 선언 -->
+<bean id="svc" class="part03_exam.ServiceImp"/>
+
+<!-- Advice 설정 -->
+<aop:config>
+<!--  ServiceImp.prn1()메소드를 수행되기전에 AspectCommon클래스에 있는 comm1메소드를 수행하라 -->
+<aop:aspect ref="common">          
+<aop:pointcut expression="execution(* part03_exam.ServiceImp.prn(..))" id="aa"/>
+<aop:around method="logging" pointcut-ref="aa" />
+</aop:aspect>
+</aop:config>
+
+</beans>

@@ -14,6 +14,10 @@
 		<config>src/main/java/part05_exam/di.xml</config>
 		<config>src/main/java/part07_multi_xml/di2.xml</config>
 		<config>src/main/java/prob01/di.xml</config>
+		<config>src/main/java/part08_xml_annotation/di.xml</config>
+		<config>src/main/java/part09_annotation_xml/di1.xml</config>
+		<config>src/main/java/part09_annotation_xml/di2.xml</config>
+		<config>src/main/java/part11_listener/di.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

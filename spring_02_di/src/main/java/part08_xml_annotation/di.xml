@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 
+	[XML설정파일에서 @Configuration어노테이션 클래스 사용하기]
+	ConfigurationClassPostProcessor클래스는 @Configuration어노테이션이
+	적용된 빈 객체에서 @Bean어노테이션이 적용된 메서드로부터 빈 객체를 가져와 스프링 컨테이너에 등록한다.
+ -->
+<bean class="org.springframework.context.annotation.ConfigurationClassPostProcessor"/>
+
+<bean class="part08_xml_annotation.Config"/>
+</beans>
