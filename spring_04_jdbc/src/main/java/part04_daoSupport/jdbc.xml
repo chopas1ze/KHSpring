@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<!-- [1] DataSource빈 선언 -->
+	<!-- dataSource빈을 생성하기 위한 첫번째 방법 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin://@127.0.0.1:1521:xe" />
+		<property name="username" value="hr" />
+		<property name="password" value="a1234" />
+	</bean>
+
+	<!-- dataSource빈을 생성하기 위한 두번째 방법 -->
+	<!-- <context:property-placeholder location="classpath:config/oracle.properties"/> -->
+	<bean id="dataSource2"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<!-- dataSource빈을 생성하기 위한 세번째 방법 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>classpath:config/oracle.properties</value>
+		</property>
+	</bean>
+	<bean id="dataSource3"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+
+
+	<!-- [2] SqlSessionfactoryBean 빈 선언 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- <property name="configLocation" value="classpath:config/configuration.xml"/> -->
+		<!-- configuration에 환경설정도 없고 mapper가 하나일때는 mapper만 설정가능 -->
+		<!-- <property name="mapperLocations" value="classpath*:config/mapper.xml"/> -->
+		<!-- mapper가 여러개일경우 -->
+		<property name="mapperLocations">
+			<list>
+				<value>config/mapper.xml</value>
+				<value>config/mapper2.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- [3] MemDaoImp 빈 선언 -->
+	<bean id="dao" class="part04_daoSupport.MemDaoImp">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+</beans>

@@ -3,20 +3,20 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mem">
-	<select id="all" resultType="part03.MemDTO">
+<mapper namespace="mem2">
+	<select id="all" resultType="part04_daoSupport.MemDTO">
 		select * from mem order by num desc
 	</select>
-	<insert id="ins" parameterType="part03.MemDTO">
+	<insert id="ins" parameterType="part04_daoSupport.MemDTO">
  	insert into mem values(mem_num_seq.nextval,#{name,jdbcType=VARCHAR},#{age,jdbcType=NUMERIC},#{loc,jdbcType=VARCHAR})
 	</insert>
-	<update id="upt" parameterType="part03.MemDTO">
+	<update id="upt" parameterType="part04_daoSupport.MemDTO">
 		update mem set name=#{name} where num=#{num}
 	</update>
 	<delete id="del" parameterType="int">
 	 delete from mem where num=#{num}
 	</delete>
-	<select id="one" parameterType="int" resultType="part03.MemDTO">
+	<select id="one" parameterType="int" resultType="part04_daoSupport.MemDTO">
 		select * from mem where num=#{num}
 	</select>
 	<select id="cnt" resultType="int">
