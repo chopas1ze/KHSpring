@@ -1,0 +1,5 @@
+get방식   아파치 server.xml URIEncoding="UTF-8"
+post방식  1) request.setCharterEncoding("utf-8");
+		2) Filter인터페이스를 상속받아 클래스로 구현.
+			@Filter 등록을 시킴(어노테이션)
+		3) 스프링에서는 web.xml에서 CharacterEncodingFilter등록  

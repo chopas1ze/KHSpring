@@ -25,6 +25,8 @@
 	<constructor-arg ref="sqlSessionFactory" index="0"/>
 	</bean>
 	
+	 <!--  Spring jdbc나 Mybatis를 이용해서 DB연동을 처리하는 경우 DataSourceTransactionManagers를 트랜잭션 관리자로 사용된다. -->
+	
 	<!-- [4] TransactionManager 빈 선언 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 	<property name="dataSource" ref="dataSource"/>

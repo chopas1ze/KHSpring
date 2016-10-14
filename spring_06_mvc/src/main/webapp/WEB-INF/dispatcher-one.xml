@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- Controller 빈 선언 -->
+<bean id="hello" class="part01.HelloController"/>
+
+<!--  view/part01/hello -->
+<!-- view 빈 선언 -->
+<!-- 참조할 필요가 없으면 id가 없어도된다 -->
+<bean id="view" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<property name="prefix" value="/WEB-INF/"/>
+<property name="suffix" value=".jsp"/>
+</bean> 
+</beans>
