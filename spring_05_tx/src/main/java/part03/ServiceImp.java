@@ -24,7 +24,7 @@ public class ServiceImp implements Service{
 	@Transactional(rollbackFor=java.lang.Exception.class)
 	@Override
 	public void testProcess() throws Exception{
-		//트랜잭션이 설정된 메소드(선언전 트랜잭션2가지방법)에서는  try~catch을 설정하면 안되고
+		//트랜잭션이 설정된 메소드(선언적 트랜잭션2가지방법)에서는  try~catch을 설정하면 안되고
 		//메소드를 호출하는 곳에서 try~catch을 한다.
 		//트랜잭션이 설정된 메소드에서 예외처리하면 트랜잭션이 적용이 안된다.
 		
