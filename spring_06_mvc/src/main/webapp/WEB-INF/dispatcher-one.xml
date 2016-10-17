@@ -3,9 +3,56 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<!-- Controller 빈 선언 -->
+<!-- [1] DataSource빈 선언 -->
+<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin://@127.0.0.1:1521:xe" />
+		<property name="username" value="hr" />
+		<property name="password" value="a1234" />
+	</bean>
+
+<!-- [2] SqlSessionFactoryBean 빈 선언 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations">
+		<list>
+		<value>classpath*:part05/mapper.xml</value>
+		<value>classpath*:part06/mapper.xml</value>
+		</list>
+		</property>
+	</bean>
+
+	<!-- [3] SqlSessionTemplate 빈 선언 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" index="0" />
+	</bean>
+
+	<!-- [4] MemDaoImp빈 선언 -->
+	<bean id="dao" class="part05.MemDaoImp">
+	<property name="sqlSession" ref="sqlSession"></property>
+	</bean>	
+
+
+	<bean id="orderDao" class="part06.OrderDaoImp">
+	<property name="sqlSession" ref="sqlSession"/>
+	</bean>
+	
+
+<!--[5] Controller 빈 선언 -->
 <bean id="hello" class="part01.HelloController"/>
 <bean id="helloModel" class="part02.HelloModelController"/>
+<bean id="helloModelView" class="part03.HelloModelViewController"/>
+<bean id="hellocommand" class="part04.HelloCommandController"/>
+<bean id="memList" class="part05.MemListController">
+<property name="dao" ref="dao"/>
+</bean>
+<bean id="memInsert" class="part05.MemInsertController">
+<property name="dao" ref="dao"/>
+</bean>
+<bean id="orderInsert" class="part06.OrderInsertController">
+<property name="dao" ref="orderDao"/>
+</bean>
 
 <!--  view/part01/hello -->
 <!-- view 빈 선언 -->

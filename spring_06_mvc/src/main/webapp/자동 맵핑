@@ -1,0 +1,4 @@
+스프링의 자동 맵핑
+
+FORM안의 INPUT 요소의 NAME속성 = dto의 멤버변수명 = TABLE의 COLUMN명을 같게하면
+자동 매핑이 이루어 진다. 

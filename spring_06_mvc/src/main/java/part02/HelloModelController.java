@@ -16,5 +16,4 @@ public class HelloModelController {
 		return model;
 	}
 	
-	
 }//end class

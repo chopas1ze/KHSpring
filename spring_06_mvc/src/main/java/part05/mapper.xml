@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mem">
+	<select id="all" resultType="part05.MemDTO">
+		select * from mem order by num desc
+	</select>
+
+<insert id="ins" parameterType="part05.MemDTO">
+insert into mem values(mem_num_seq.nextval,#{name},#{age},#{loc})
+</insert>
+</mapper>
