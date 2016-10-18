@@ -15,15 +15,15 @@ public class SpringTest {
 		//dao.updateMethod(new MemDTO(16,"철수"));
 		//dao.deleteMethod(20);
 		
-	/*	List<MemDTO>  list = dao.list();
+		List<MemDTO>  list = dao.list();
 		for(MemDTO dto : list)
-			System.out.printf("%d %s %d %s\n",dto.getNum(),dto.getName(),dto.getAge(),dto.getLoc());*/
+			System.out.printf("%d %s %d %s\n",dto.getNum(),dto.getName(),dto.getAge(),dto.getLoc());
 
-		MemDTO dto = dao.one(29);
+	/*	MemDTO dto = dao.one(29);
 		
 			System.out.printf("%d %s %d %s\n",dto.getNum(),dto.getName(),dto.getAge(),dto.getLoc());
 		
-		System.out.println("count:"+dao.countMethod());
+		System.out.println("count:"+dao.countMethod());*/
 	}//end main()
 
 }//end class
