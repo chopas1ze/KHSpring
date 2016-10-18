@@ -17,14 +17,14 @@ public class MemInsertController {
 	
 	@RequestMapping(value="/memInsert.htm", method=RequestMethod.GET)
 	public String form(){
-		return "view/part05/memForm";
+		return "view/part05/memForm";  //order
 	}
 
 
 	@RequestMapping(value="/memInsert.htm", method=RequestMethod.POST)
 	public String process(MemDTO dto){
 		dao.insertMethod(dto);
-		return "redirect:/memList.htm";
+		return "redirect:/memList.htm";  //redirect
 	}
 	
 	

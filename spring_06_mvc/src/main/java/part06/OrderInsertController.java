@@ -15,14 +15,13 @@ public class OrderInsertController {
 	
 	@RequestMapping(value = "/orderInsert.htm", method = RequestMethod.GET)
 	public String form() {
-		return "view/part06/form";
+		return "view/part06/form";  //forward
 	}// end form()
 
 	@RequestMapping(value="/orderInsert.htm", method= RequestMethod.POST)
 	public String process(OrderDTO dto){
 		dao.insertMethod(dto);
-		
-		return "redirect:/orderList.htm";
+		return "redirect:/orderList.htm";  
 		
 	}
 	

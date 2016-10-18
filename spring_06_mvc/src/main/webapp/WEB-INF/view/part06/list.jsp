@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<a href="orderInsert.htm">글쓰기</a>
 	<p>
 		<c:forEach items="${aList}" var="dto">
 			<c:forEach items="${dto.list}" var="item">

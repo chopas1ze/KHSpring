@@ -7,10 +7,22 @@
 	<insert id="ins" parameterType="part06.OrderDTO">
 		insert all
 		<foreach collection="list" item="item">
-		into orderitem
-		values(#{item.id},#{item.cnt},#{item.remark},#{address})
-		</foreach> 
+			into orderitem
+			values(#{item.id},#{item.cnt},#{item.remark},#{address})
+		</foreach>
 		select * from dual
 	</insert>
 
+	<resultMap type="part06.OrderDTO" id="dto" >
+		<result column="address" property="address"/>
+		<collection property="list" javaType="java.util.List" ofType="part06.OrderItem">
+		<result column="id" property="id"/>
+		<result column="cnt" property="cnt"/>
+		<result column="remark" property="remark"/>
+		</collection>
+	</resultMap>
+	
+	<select id="all" resultMap="dto">
+		select * from orderitem
+	</select>
 </mapper>

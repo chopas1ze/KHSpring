@@ -53,6 +53,9 @@
 <bean id="orderInsert" class="part06.OrderInsertController">
 <property name="dao" ref="orderDao"/>
 </bean>
+<bean id ="orderList" class="part06.OrderListController">
+<property name="dao" ref="orderDao"/>
+</bean>
 
 <!--  view/part01/hello -->
 <!-- view 빈 선언 -->
