@@ -18,4 +18,26 @@
  		 where b.rm>=#{startRow} and b.rm<=#{endRow}
 		]]>
 	</select>
+	
+	<update id="readCount" parameterType="int">
+	update board set readcount=readcount+1 where num=#{num}
+	
+	</update>
+	
+	<select id="content" parameterType="int" resultType="dto.BoardDTO">
+	select * from board where num=#{num}
+	</select>
+	
+	<insert id="save" parameterType="dto.BoardDTO">
+		insert into
+		board(num,writer,email,subject,reg_date,
+		readcount,ref,re_step,re_level,content,ip,upload)
+		values(board_seq.nextval,#{writer},#{email},#{subject},sysdate,0,
+		board_seq.nextval,#{re_step},#{re_level},#{content},#{ip},#{upload,jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="restep" parameterType="dto.BoardDTO">
+	update board set re_step=re_step+1 where ref=${ref} and re_step>${re_step}
+	</update>
+	
 </mapper>

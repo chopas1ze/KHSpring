@@ -9,6 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form id="frm" name="frm" method="get" action="write.sb">
+<input type="submit" id="btnWrite" value="글쓰기"/>
+</form>
+
+
+
 	<div id="bodywrap">
 		<!-- 리스트 출력 -->
 		<table>
@@ -21,12 +27,17 @@
 			<c:forEach items="${aList}" var="dto">
 				<tr>
 					<td width="5%" style="text-align: center">${dto.num}</td>
-					<td width="45%" style="text-align: center"><c:if
-							test="${dto.re_level!=0}">
+					<td width="45%" style="text-align: center">
+					<c:url var="content" value="view.sb">
+					<c:param name="currentPage" value="${pv.currentPage}"/>
+					<c:param name="num" value="${dto.num}"/>
+					</c:url>
+					<c:if test="${dto.re_level!=0}">
+							<!-- 이미지파일은 web.xml 에서 서블릿 맵핑 필요함. -->
 							<img src="images/level.gif" width="${35*dto.re_level}"
 								height="15" />
 							<img src="images/re.gif" />
-						</c:if> ${dto.subject}</td>
+						</c:if><a href="${content}">${dto.subject}</a></td>
 					<td width="20%" style="text-align: center">${dto.writer}</td>
 					<td width="5%" style="text-align: center">${dto.readcount}</td>
 				</tr>

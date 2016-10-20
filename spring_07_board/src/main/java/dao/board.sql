@@ -15,6 +15,8 @@ create table board(
 
 select * from board
 create sequence board_seq start with 1 increment by 1;
+drop sequence board_seq;
+
 
 insert into board 
 values(board_seq.nextval, '홍길동','young@aaaa.com','제목1',sysdate,0,board_seq.nextval,
@@ -24,13 +26,11 @@ commit
 
 select * from board where subject like '%e%';
 
-
+select * from board;
 delete from board;
 commit
 
-select b.*  from(
-   select rownum as rm, a.*   from(
-      select * from board order by ref desc, re_step asc)a)b  
+select b.*  from(select rownum as rm, a.* from select * from board order by ref desc, re_step asc)a)b  
  where b.rm>=6 and b.rm<=10 
 
  select num,upload from board where num=65

@@ -30,26 +30,23 @@ public class BoardDaoImp implements BoardDAO{
 
 	@Override
 	public void readCount(int num) {
-			
+		sqlSession.update("board.readCount",num);
 	}
 
 	
 	@Override
 	public BoardDTO content(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("board.content",num);
 	}
 
 	@Override
 	public void reStepCount(BoardDTO dto) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update("board.restep",dto);
 	}
 
 	@Override
 	public void save(BoardDTO dto) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("board.save",dto);
 	}
 
 	@Override
