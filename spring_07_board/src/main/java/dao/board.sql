@@ -30,8 +30,8 @@ select * from board;
 delete from board;
 commit
 
-select b.*  from(select rownum as rm, a.* from select * from board order by ref desc, re_step asc)a)b  
- where b.rm>=6 and b.rm<=10 
+select b.* from(select rownum as rm, a.* from(select * from board order by ref desc, re_step asc)a)b  
+ where b.rm>=1 and b.rm<=5 
 
  select num,upload from board where num=65
 

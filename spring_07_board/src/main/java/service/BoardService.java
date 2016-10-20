@@ -17,6 +17,8 @@ public interface BoardService {
 	public BoardDTO updateSelectProcess(int num);
 	public void updateProcess(BoardDTO dto,HttpServletRequest request);
 	public String deleteProcess(int num,HttpServletRequest request);
+	
+	
 }
 
 

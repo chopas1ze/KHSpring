@@ -27,17 +27,41 @@
 	<select id="content" parameterType="int" resultType="dto.BoardDTO">
 	select * from board where num=#{num}
 	</select>
-	
+		
 	<insert id="save" parameterType="dto.BoardDTO">
 		insert into
 		board(num,writer,email,subject,reg_date,
 		readcount,ref,re_step,re_level,content,ip,upload)
 		values(board_seq.nextval,#{writer},#{email},#{subject},sysdate,0,
-		board_seq.nextval,#{re_step},#{re_level},#{content},#{ip},#{upload,jdbcType=VARCHAR})
+		<choose>
+		<when test="ref==0">
+		board_seq.nextval
+		</when>
+		<otherwise>
+		#{ref}
+		</otherwise>
+		</choose>
+		,#{re_step},#{re_level},#{content},#{ip},#{upload,jdbcType=VARCHAR})
 	</insert>
 	
-	<update id="restep" parameterType="dto.BoardDTO">
-	update board set re_step=re_step+1 where ref=${ref} and re_step>${re_step}
+	<update id="reStepCount" parameterType="dto.BoardDTO">
+	
+
+	<![CDATA[
+	update board set re_step=re_step+1 where ref=#{ref} and re_step>#{re_step}
+	]]>
+	</update>
+	
+	<select id="uploadFile" parameterType="int" resultType="String">
+	select upload from board where num=#{num}
+	</select>
+	
+	<update id="update" parameterType="dto.BoardDTO">
+	update board set subject=#{subject},email=#{email},content=#{content}
+	<if test="upload!=null">
+	,upload=#{upload}
+	</if>
+	 where num=#{num}
 	</update>
 	
 </mapper>

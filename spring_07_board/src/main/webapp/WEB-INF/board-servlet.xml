@@ -71,14 +71,27 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	<!-- uploadTempDir관련 클래스가 없을시 메이븐에서 fileupload 검색하여 다운로드 apache Commons Fileupload -->
 	<property name="uploadTempDir" ref="uploadDirResource"/>
+	<!-- 파일 크기 제한. 여기서 하지말고 클라이언트에서 처리하길바람.-->
+<!-- 	<property name="maxUploadSize" value="1000"/>  -->
 	</bean>
 	<!--  파일 업로드 끝 -->
 	
+	<!-- 다운로드 뷰 선언 -->
+	<bean id="download" class="view.BoardDownLoadView">
+	<property name="dao" ref="bdao"/>
+	</bean>
 	
 	<!-- [10] View 빈 선언 -->
+	
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	<property name="order" value="1"/>
+	</bean>
+	
+	<!-- InternalResourceViewResolver는 항상 우선순위값을 낮게 설정한다. 높게 설정하면 검색이 중간에 멈추는 경우도 있다 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	<property name="prefix" value="/WEB-INF/"/>
 	<property name="suffix" value=".jsp"/>
+	<property name="order" value="2"/>
 	</bean>
 	
 		

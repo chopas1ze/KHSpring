@@ -19,14 +19,35 @@
 	  });
 	  
 	  $('#btnSave').bind('click',function(){
+			/* $('[name=content]').val(
+			$('[name=content]').val().replace(/\n/gi, '<br/>')); */
+		  
 		  $('#frm').attr('action','write.sb').submit();
 	  });
+	  
+  $('#filepath').on('change',function(){
+		  //type 이 file이면 첨부파일이 있으면 files  배열 형태로 들어온다.
+		  if(this.files && this.files[0]){
+			  if(this.files[0].size>1000000000){
+				  alert("1GB바이트 이하만 첨부할 수 있습니다.");
+				  $('#filepath').val('');
+				  return false;
+			  }
+		  }
+	  });
+	   
   });
+  
+	function process() {
+			$('[name=content]').val(
+					$('[name=content]').val().replace(/\n/gi, '<br/>'));
+			return true;
+		}
 </script>
 
 </head>
 <body>
-	<form name="frm" id="frm" method="post" enctype="multipart/form-data">
+	<form name="frm" id="frm" method="post" enctype="multipart/form-data" onsubmit="return process()">
 
 		<table>
 
@@ -54,7 +75,7 @@
 
 			<tr>
 				<td width="20%" align="center">첨부파일</td>
-				<td><input type="file" name="filename" />
+				<td><input type="file" name="filename" id="filepath" />
 			</tr>
 		</table>
 		<!-- 답변글일때.... -->

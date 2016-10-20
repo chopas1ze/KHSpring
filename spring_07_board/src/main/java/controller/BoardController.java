@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +20,7 @@ import dto.PageDTO;
 import service.BoardService;
 
 @Controller
+
 public class BoardController {
 	private BoardService service;
 	private int currentPage;
@@ -60,6 +60,22 @@ public class BoardController {
 	public ModelAndView viewMethod(int currentPage, int num){
 		ModelAndView mav = new ModelAndView();
 		BoardDTO dto = service.contentProcess(num);
+		
+		/*if(dto.getUpload()!=null){
+		String up = dto.getUpload();
+		int index = up.indexOf("_");
+		dto.setUpload(up.substring(index+1));
+		
+		dto.setUpload(dto.getUpload().substring(dto.getUpload().indexOf("_")+1));		
+		}*/
+		
+	/*	try{
+			dto.setUpload(dto.getUpload().substring(dto.getUpload().indexOf("_")+1));	
+		}catch (Exception e) {
+			
+		}*/
+		
+	
 		mav.addObject("dto",dto);
 		//view.jsp에서 currentPage값을 넘겨준다. 답변 삭제 수정 목록 으로 갈때 필요.
 		mav.addObject("currentPage",currentPage);
@@ -91,7 +107,7 @@ public class BoardController {
 			String root=req.getSession().getServletContext().getRealPath("/");
 			//root+"temp/"
 			
-			/*C:\study\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\webdemo\*/
+			/*C:\study\workspace_spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\spring_07_board\temp */
 			String saveDirectory = root+"temp"+File.separator;  //File.separator 는 "/" 이다.
 			
 			//디렉토리 생성 용도
@@ -114,17 +130,52 @@ public class BoardController {
 		//클라이언트 ip주소 넣기
 		dto.setIp(req.getRemoteAddr());
 
-		if(dto.getRe_level()!=0){
+		//답변글이면
+		if(dto.getRef()!=0){
+		/*	HashMap<String, Integer> map = new HashMap<String, Integer>();
+			map.put(dto.setRe_step(dto.getRe_step()+1));
+			map.put(dto.setRe_level(dto.getRe_level()+1));  serviceimp에서 처리안하실에는 여기서 처리도 가능*/
 			
 			service.reStepProcess(dto);
-			dto.setRef(dto.getRef());
-			dto.setRe_step(dto.getRe_step()+1);
-			dto.setRe_level(dto.getRe_level()+1);
+		}else{//제목글이면
+			service.insertProcess(dto);		
 		}
-		
-		
-		service.insertProcess(dto);
 		
 		return "redirect:/list.sb";
 	}//end writeProMethod()
+	
+	
+	@RequestMapping("/contentdownload.sb")
+	public ModelAndView downMethod(int num){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("num",num);
+		mav.setViewName("download");
+		return mav;
+		
+		//하나의 뷰에 하나의 값은 생성자를 통해서 가능
+							//       뷰		  모델명 모델값
+		//return new ModelAndView("download","num",num);
+		
+		
+		
+	}//end downMethod()
+	
+	@RequestMapping(value="/update.sb", method = RequestMethod.GET)
+	public ModelAndView updateMethod(int num, int currentPage){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("dto",service.updateSelectProcess(num));
+		mav.addObject("currentPage",currentPage);
+		mav.setViewName("board/update");
+		return mav;
+	}//end updateMethod()
+	
+	@RequestMapping(value="/update.sb", method = RequestMethod.POST)
+	public ModelAndView updateProc(BoardDTO dto, int currentPage, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		service.updateProcess(dto, request);
+		mav.addObject("currentPage", currentPage);
+		mav.setViewName("redirect:list.sb");
+		return mav;
+	}//end updateProc()
+	
 }//end class
