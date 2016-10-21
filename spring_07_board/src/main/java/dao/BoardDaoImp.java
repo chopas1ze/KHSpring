@@ -62,7 +62,7 @@ public class BoardDaoImp implements BoardDAO{
 
 	@Override
 	public void delete(int num) {
-		sqlSession.delete("board.del",num);
+		sqlSession.delete("board.delete",num);
 	}
 
 	@Override

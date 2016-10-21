@@ -1,0 +1,41 @@
+tiles 사용 순서 :
+1) pom.xml에 필요한 라이브러리 추가
+   <dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+			<version>2.1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-servlet</artifactId>
+			<version>2.1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>2.1.2</version>
+		</dependency>
+
+2) 레이아웃 템플릿 (layout.jsp)로 사용할 jsp파일 작성
+
+4) 2)번 각 영역에 사용할 기본 jsp페이지 작성
+
+
+5) tiles.xml에 tiles에 대한 정의
+	- tiles.xml에는  http://apache.org/ 에서 tiles-dtd가 필요
+	  tiles-doc에서 tiles버전과 맞는 DTD 복사
+		
+6) dispatchertiles-servlet.xml에 스프링 환경설정
+		
+7) web.xml에 dispatchertiles-servlet.xml등록
+
+
+
+환경설정에서 주소를 지정할때 web-inf폴더 안에 있는 것은 /WEB-INF/부터 시작
+					 src/main/java안에 있는것은 패키지명부터 시작 
+
+
+
+

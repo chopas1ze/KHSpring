@@ -103,9 +103,19 @@ public class BoardServiceImp implements BoardService{
 	}//end updateProcess
 
 	@Override
-	public String deleteProcess(int num, HttpServletRequest request) {
-		return null;
-	}
+	public void deleteProcess(int num, HttpServletRequest request) {
+		//첨부파일 삭제
+		String upload = dao.getFile(num);
+		if(upload != null){
+			String root = request.getSession().getServletContext().getRealPath("/");
+			String saveDirectory = root + "temp" + File.separator;
+			File fe = new File(saveDirectory, upload);
+			fe.delete();
+		}
+		
+		dao.delete(num);
+		
+	}//end deleteProcess()
 	
 	
 	

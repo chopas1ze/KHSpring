@@ -29,6 +29,7 @@ public class BoardController {
 	public BoardController() {
 	}
 	
+	//BoardService를 사용하기 위한 setter 정의  -> bean환경설정 property값을 받기 위해
 	public void setService(BoardService service) {
 		this.service = service;
 	}
@@ -39,6 +40,7 @@ public class BoardController {
 		//객체로 받지 않으면  null 오류가 떠서 if를 사용하여 page초기값을 지정해야 한다.
 		ModelAndView mav = new ModelAndView();
 		
+		//게시판 테이블의 총 레코드수 
 		int totalRecord = service.countProcess();
 		if(totalRecord >=1 ){
 			if(pv.getCurrentPage()==0)
@@ -134,7 +136,7 @@ public class BoardController {
 		if(dto.getRef()!=0){
 		/*	HashMap<String, Integer> map = new HashMap<String, Integer>();
 			map.put(dto.setRe_step(dto.getRe_step()+1));
-			map.put(dto.setRe_level(dto.getRe_level()+1));  serviceimp에서 처리안하실에는 여기서 처리도 가능*/
+			map.put(dto.setRe_level(dto.getRe_level()+1));  serviceimp에서 처리안할때는 여기서 처리도 가능*/
 			
 			service.reStepProcess(dto);
 		}else{//제목글이면
@@ -177,5 +179,22 @@ public class BoardController {
 		mav.setViewName("redirect:list.sb");
 		return mav;
 	}//end updateProc()
+	
+	
+	@RequestMapping("/delete.sb")
+	public ModelAndView deleteMethod(int num, int currentPage, HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		//레코드를 삭제하기위한 num,  첨부파일 삭제에 필요한 request 
+		service.deleteProcess(num, request);
+		
+		PageDTO pv = new PageDTO(service.countProcess());
+		if(pv.getTotalPage() < currentPage)
+			mav.addObject("currentPage", pv.getTotalPage());
+		else
+			mav.addObject("currentPage", currentPage);
+		
+			mav.setViewName("redirect:/list.sb");
+			return mav;
+	}//end deleteMethod()
 	
 }//end class
