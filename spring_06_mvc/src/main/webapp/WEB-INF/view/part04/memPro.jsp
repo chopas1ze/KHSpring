@@ -17,8 +17,8 @@
 <p>나이:${memDTO.age}</p>
 <hr/>
 
-<p>이름:${dto.name}</p>
-<p>나이:${dto.age}</p>
+ <p>이름:${dto.name}</p>
+<p>나이:${dto.age}</p> 
 
 
 </body>

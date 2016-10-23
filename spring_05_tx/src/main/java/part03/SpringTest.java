@@ -15,7 +15,6 @@ public class SpringTest {
 				svc.testProcess();
 				System.out.println("result:ok");
 			}catch (Exception e) {
-				//exception 이벤트 에러 찾는 용도
 				System.out.println("result:fail");
 			}
 			

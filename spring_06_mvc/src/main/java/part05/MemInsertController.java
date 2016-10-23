@@ -17,7 +17,7 @@ public class MemInsertController {
 	
 	@RequestMapping(value="/memInsert.htm", method=RequestMethod.GET)
 	public String form(){
-		return "view/part05/memForm";  //order
+		return "view/part05/memForm";  //forward
 	}
 
 

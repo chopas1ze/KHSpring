@@ -21,7 +21,7 @@ public class ServiceImp implements Service{
 	}
 	
 	@Override
-	public void insertPorcess() {
+	public void insertProcess() {
 		Object result = transactionTemplate.execute(new TransactionCallback<Object>() {
 
 			@Override

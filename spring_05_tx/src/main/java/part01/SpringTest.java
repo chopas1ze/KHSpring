@@ -9,7 +9,7 @@ public class SpringTest {
 
 			ApplicationContext context = new ClassPathXmlApplicationContext("part01/tx.xml");
 			Service svc=(Service)context.getBean("svc");
-			svc.insertPorcess();
+			svc.insertProcess();
 		
 		
 		
