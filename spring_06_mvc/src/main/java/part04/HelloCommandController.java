@@ -23,9 +23,20 @@ public class HelloCommandController {
 			return mav;
 		}//end submit()
 		
+		
+		/*@RequestMapping(value="/mem.htm", method=RequestMethod.POST)
+		public String submit(MemDTO dto){  
+			return "view/part04/memPro";
+		}//end submit()
+*/
+		
 		/*@RequestMapping(value="/mem.htm", method=RequestMethod.POST)
 		public String submit(@ModelAttribute("dto") MemDTO dto){  //@ModelAttribute -> alias 지정하고 view page에서 사용가능
 			return "view/part04/memPro";
 		}//end submit()
 */		
+		
+		
+		
+		
 }//end class

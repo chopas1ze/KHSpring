@@ -1,0 +1,20 @@
+ajax에 필요한 XMLHttpRequset는 브라우저에 설치되어있다.
+
+client 요청을 XHR이 받고 XHR에서 server쪽에 전달 
+server에서 XHR에 응답을 전달 후 XHR에서 client로 전달
+
+클라이언트가 요청하고나서 응답받을때까지 아무것도 못하는건 동기화식
+
+클라이언트가 요청하고나서 응답받기전에도 다른 작업을 할수 있는것은 비동기화식
+(지도,검색기능등등)
+
+http://w3schools.com
+learn ajax  (자바스크립트를 이용한 방법)
+
+
+http://jquery.com
+api documentation -> ajax
+
+
+
+

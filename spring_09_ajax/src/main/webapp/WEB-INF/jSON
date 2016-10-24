@@ -1,0 +1,29 @@
+1) pom.xml
+
+	<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		
+2) dispatcher-context.xml
+	<!-- jSON 어노테이션 설정시 필요 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+3) controller
+	@ResponseBody
+	
+		public @ResponseBody List<EmployeeDTO> searchProcess(String data){
+			
+		return dao.search(data); 
+		
+	}
+	

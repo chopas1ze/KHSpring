@@ -43,11 +43,13 @@ public class BoardController {
 		//게시판 테이블의 총 레코드수 
 		int totalRecord = service.countProcess();
 		if(totalRecord >=1 ){
+			// 첫 접속시 현재페이지를 1로 지정
 			if(pv.getCurrentPage()==0)
 				currentPage=1;
 			else
 				currentPage=pv.getCurrentPage();
 				
+			//페이지 번호와 관련된 값 구하기
 			pdto = new PageDTO(currentPage,totalRecord);
 			
 			//list.jsp에서 페이지번호를 사용하기위해 pdto를 넘겨준다.	
