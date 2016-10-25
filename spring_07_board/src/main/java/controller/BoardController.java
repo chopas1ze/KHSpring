@@ -63,6 +63,7 @@ public class BoardController {
 	@RequestMapping("/view.sb")
 	public ModelAndView viewMethod(int currentPage, int num){
 		ModelAndView mav = new ModelAndView();
+		
 		BoardDTO dto = service.contentProcess(num);
 		
 		/*if(dto.getUpload()!=null){

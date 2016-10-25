@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lib">
+
+ <select id="lib_countAll" parameterType="String" resultType="int">
+   select count(*) from libmap where area like '%' || #{data} || '%'
+ </select>
+ 
+ <select id="lib_list" parameterType="java.util.HashMap" resultType="dto.LibmapDTO">
+ <![CDATA[
+select b.* from(
+ select rownum as rowm, a.* from(
+    select * from libmap
+    where area like '%' || #{keyword} || '%')a )b
+ where b.rowm>=#{Startpage} and b.rowm<=#{Endpage}   
+ ]]> 
+ </select>
+
+</mapper>
