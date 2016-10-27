@@ -9,26 +9,26 @@
 
 
 	<!-- automapping으로 해놔도 첫줄 result column은 해줘야 인식할 수 있다. -->
-	<resultMap type="dto.BoardDTO" id="b_list_r_view"
-		autoMapping="true">
+	<resultMap type="dto.BoardDTO" id="b_list_r_view" autoMapping="false">
 		<result column="bno" property="bno" />
 		<result column="title" property="title" />
 		<result column="content" property="content" />
 		<result column="writer" property="writer" />
-		<result column="regdate" property="regdate" />
+		<result column="breg" property="regdate" />
 		<result column="viewcnt" property="viewcnt" />
 		<collection property="replyList" javaType="java.util.List"
-			ofType="dto.ReplyDTO" autoMapping="true">
+			ofType="dto.ReplyDTO" autoMapping="false" >
 			<result column="rno" property="rno" />
-			<result column="bno" property="bno" />
+			<result column="rb" property="bno" />
 			<result column="replytext" property="replytext" />
 			<result column="replyer" property="replyer" />
-			<result column="regdate" property="regdate" />
+			<result column="rdate" property="regdate" />
+			<!-- <result column="rupload" property="rupload"/> -->
 		</collection>
 	</resultMap>
 
 	<select id="b_view" parameterType="int" resultMap="b_list_r_view">
-		select b.*, r.* from tbl_board b, tbl_reply r where b.bno=r.bno and
+		select b.regdate as breg, b.*, r.bno as rb, r.regdate as rdate, r.* from tbl_board b, tbl_reply r where b.bno=r.bno(+) and
 		b.bno=#{bno} order by r.rno desc
 	</select>
 </mapper>

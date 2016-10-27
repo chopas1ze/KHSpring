@@ -42,6 +42,18 @@ public class BoardController {
 	public @ResponseBody List<ReplyDTO> replyListPage(ReplyDTO rdto){
 		System.out.println(rdto.getBno());
 		return service.replyListProcess(rdto);
-	}
+	}//end replyListPage()
+	
+	@RequestMapping("/replyDelete.do")
+	public @ResponseBody List<ReplyDTO> replyDeleteListPage(ReplyDTO rdto){
+		return service.replyDeleteProcess(rdto);
+	}//end replyDeleteListPage()
+	
+	@RequestMapping("/replyUpdate.do")
+	public @ResponseBody List<ReplyDTO> replyUpdateListPage(ReplyDTO rdto){
+		return service.replyUpdateProcess(rdto);
+	}//end replyUpdateListPage()
+	
+	
 	
 }//end class

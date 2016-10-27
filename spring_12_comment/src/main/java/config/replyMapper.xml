@@ -11,4 +11,15 @@ values(reply_rno_seq.nextval,#{bno},#{replytext},#{replyer},sysdate)
 <select id="r_list" parameterType="int" resultType="dto.ReplyDTO">
 select * from tbl_reply where bno=#{bno} order by rno desc
 </select>
+
+<delete id="r_delete" parameterType="int">
+delete from tbl_reply where rno=#{rno}
+</delete>
+
+<update id="r_update" parameterType="dto.ReplyDTO">
+update tbl_reply set replytext=#{replytext}
+where rno=#{rno}
+</update>
+
+
 </mapper>

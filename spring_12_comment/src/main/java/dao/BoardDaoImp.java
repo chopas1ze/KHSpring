@@ -37,6 +37,15 @@ public class BoardDaoImp implements BoardDao {
 		return sqlSession.selectList("reply.r_list",bno);
 	}
 	
+	@Override
+	public void replyDeleteMethod(int rno) {
+		sqlSession.delete("reply.r_delete",rno);
+	}
+	
+	@Override
+	public void replyUpdateMethod(ReplyDTO rdto) {
+		sqlSession.update("reply.r_update",rdto);
+	}
 	
 	
 }//end class

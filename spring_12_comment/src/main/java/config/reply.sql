@@ -42,4 +42,6 @@ select * from tbl_reply;
 select b.*, r.* from tbl_board b, tbl_reply r where b.bno=r.bno and b.bno=1;    
 
 
+alter table tbl_reply add rupload varchar2(1000)
+
 

@@ -35,5 +35,16 @@ public class BoardServiceImp implements BoardService {
 		return dao.replyListMethod(rdto.getBno());
 	}
 	
+	@Override
+	public List<ReplyDTO> replyDeleteProcess(ReplyDTO rdto) {
+			dao.replyDeleteMethod(rdto.getRno());
+		return dao.replyListMethod(rdto.getBno()); 
+	}
+	
+	@Override
+	public List<ReplyDTO> replyUpdateProcess(ReplyDTO rdto) {
+			  dao.replyUpdateMethod(rdto);
+		return dao.replyListMethod(rdto.getBno());
+	}
 	
 }//end class
