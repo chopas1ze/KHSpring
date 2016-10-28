@@ -23,7 +23,7 @@
 			<result column="replytext" property="replytext" />
 			<result column="replyer" property="replyer" />
 			<result column="rdate" property="regdate" />
-			<!-- <result column="rupload" property="rupload"/> -->
+			<result column="rupload" property="rupload"/>
 		</collection>
 	</resultMap>
 

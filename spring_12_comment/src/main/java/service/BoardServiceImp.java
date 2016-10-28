@@ -1,6 +1,9 @@
 package service;
 
+import java.io.File;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -36,7 +39,16 @@ public class BoardServiceImp implements BoardService {
 	}
 	
 	@Override
-	public List<ReplyDTO> replyDeleteProcess(ReplyDTO rdto) {
+	public List<ReplyDTO> replyDeleteProcess(ReplyDTO rdto,HttpServletRequest request) {
+		String upload = dao.replyUploadMethod(rdto.getRno());
+		System.out.println(upload);
+		if(upload != null){
+			String root = request.getSession().getServletContext().getRealPath("/");
+			String saveDirectory = root + "temp" + File.separator;
+			File fe = new File(saveDirectory, upload);
+			fe.delete();
+		}
+		
 			dao.replyDeleteMethod(rdto.getRno());
 		return dao.replyListMethod(rdto.getBno()); 
 	}

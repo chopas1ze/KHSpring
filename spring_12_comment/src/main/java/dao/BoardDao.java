@@ -12,5 +12,5 @@ public interface BoardDao {
 	public List<ReplyDTO> replyListMethod(int bno);
 	public void replyDeleteMethod(int rno);
 	public void replyUpdateMethod(ReplyDTO rdto);
-	
+	public String replyUploadMethod(int rno);
 }// end class

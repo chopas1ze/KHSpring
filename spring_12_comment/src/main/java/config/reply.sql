@@ -3,6 +3,8 @@ drop table tbl_reply;
 drop sequence board_bno_seq;
 drop sequence reply_rno_seq;
 
+select * from employees
+
 create table tbl_board(
 bno number,
 title varchar2(200),

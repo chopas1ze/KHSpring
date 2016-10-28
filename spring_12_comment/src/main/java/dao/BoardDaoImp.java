@@ -47,5 +47,8 @@ public class BoardDaoImp implements BoardDao {
 		sqlSession.update("reply.r_update",rdto);
 	}
 	
-	
+	@Override
+	public String replyUploadMethod(int rno) {
+		return sqlSession.selectOne("reply.r_uploadname",rno);
+	}
 }//end class

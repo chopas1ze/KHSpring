@@ -60,6 +60,23 @@
 
 
 
+	<!-- 파일 업로드 시작 -->
+	<!-- 첨부 파일의 임시기억장치 경로 설정 -->
+	<bean id="uploadDirResource" class="org.springframework.core.io.FileSystemResource">
+	<!-- <constructor-arg value="c:/temp"/> -->
+	<constructor-arg value="./src/main/webapp/files/" />
+	</bean>
+	
+	<!-- 첨부파일을 임시기억저장소에 저장한다. -->
+	<!-- multipartResolver는 반드시 똑같이 지정해야한다. 내부에서 이 이름으로 참조함 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<!-- uploadTempDir관련 클래스가 없을시 메이븐에서 fileupload 검색하여 다운로드 apache Commons Fileupload -->
+	<property name="uploadTempDir" ref="uploadDirResource"/>
+	<!-- 파일 크기 제한. 여기서 하지말고 클라이언트에서 처리하길바람.-->
+<!-- 	<property name="maxUploadSize" value="1000"/>  -->
+	</bean>
+	<!--  파일 업로드 끝 -->
+
 
 
 	<!-- [7] MemDaoImp 빈 선언 -->
@@ -76,11 +93,27 @@
 <property name="service" ref="svc"/>
 </bean>
 
+	<bean id="download" class="view.BoardDownLoadView">
+	<property name="dao" ref="dao"/>
+	</bean>
+
+
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	<property name="order" value="1"/>
+	</bean>
+
+
 <!-- viewResolver -->
 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 <property name="prefix" value="/WEB-INF/view/"/>
 <property name="suffix" value=".jsp"/>
+<property name="order" value="2"/>
 </bean>
 
+
+
+
+	
+	
 
 </beans>
