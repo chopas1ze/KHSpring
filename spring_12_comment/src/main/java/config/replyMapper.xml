@@ -18,11 +18,29 @@ delete from tbl_reply where rno=#{rno}
 
 <update id="r_update" parameterType="dto.ReplyDTO">
 update tbl_reply set replytext=#{replytext}
+<if test="rupload!=null">
+, rupload=#{rupload}
+</if>
 where rno=#{rno}
 </update>
 
 <select id="r_uploadname" parameterType="int" resultType="string">
 select rupload from tbl_reply where rno=#{rno}
 </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </mapper>

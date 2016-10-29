@@ -16,7 +16,7 @@
 	top: 150px;
 	left: 200px;
 	width: 400px;
-	height: 150px;
+	height: 180px;
 	z-index: 1000;
 	border: 1px solid black;
 	background-color: yellow;
@@ -39,7 +39,28 @@ var urno='';
 $(document).ready(function() {
 	//첫로딩 수정화면 숨김 
 	$('#modifyModal').addClass('modifyHide');
-
+	//첫로딩 보드수정화면 숨김
+	$('#boardModifyModal').addClass('modifyHide');
+	
+	//보드수정화면 닫기
+	$('#boardbtnClose').on('click',function(){
+		$('#boardModifyModal').removeClass('modifyShow');
+		$('#boardModifyModal').addClass('modifyHide');
+		$('#updateBoardTitle').val('');
+		$('#updateBoardContent').val('');
+		$('#updateBoardWriter').val('');
+	});
+	
+	//첫화면 Modify 클릭시
+	$('#modifyBtn').on('click',function(){
+		$('#boardModifyModal').removeClass('modifyHide');
+		$('#boardModifyModal').addClass('modifyShow');
+	});
+	
+	//보드수정화면 Modify 클릭시
+	$('#boardbtnModify').on('click',board_update_send);
+	
+	
 	//수정화면 닫기
 	$('#btnClose').on('click',function(){
 		$('#modifyModal').removeClass('modifyShow');
@@ -47,6 +68,9 @@ $(document).ready(function() {
 		$('#filename2').val('');
 		urno='';
 	});
+	
+	//remove 버튼 클릭시
+	$('#removeBtn').on('click',board_remove_send);
 	
 	//수정화면 modify 클릭시
 	$('#btnModify').on('click',reply_update_send);
@@ -63,7 +87,7 @@ $(document).on('click','.timeline button', reply_del_upt_btn);
 
 //Handlebars 설정
 Handlebars.registerHelper("newDate", function(timeValue){
-		var dateObj=new Date(timeValue);
+	var dateObj=new Date(timeValue);
 	var year=dateObj.getFullYear();
 	var month=dateObj.getMonth()+1;
 	var date=dateObj.getDate();
@@ -73,7 +97,7 @@ Handlebars.registerHelper("newDate", function(timeValue){
 
 Handlebars.registerHelper("newUpload",function(rno, uploadFile){
 	if(uploadFile!=null){
-		var result = '<a href="contentdownload.do?rno=' + rno + '">' + uploadFile.substring(uploadFile.indexOf("_")+1) + '</a>';
+		var result = '<img src="images/save.gif"/><a href="contentdownload.do?rno=' + rno + '">' + uploadFile.substring(uploadFile.indexOf("_")+1) + '</a>';
 		return new Handlebars.SafeString(result);
 	}
 	else
@@ -193,6 +217,47 @@ function reply_update_send(){
 };// end reply_update_send()/////////////////////
 
 
+//board remove 버튼 함수
+function board_remove_send(){
+
+	$.ajax({
+		dataType:'text',
+		type:'POST',
+		url:'boardRemove.do',
+		data:'bno=${boardDTO.bno}',
+		success: function(res){
+			location.href='boardlist.do';
+		}
+	});
+	
+};//end board_remove_send()/////////////
+
+
+//보드 modify 버튼 함수
+function board_update_send(){
+	
+	$.ajax({
+		dataType:'json',
+		type:'POST',
+		url:'boardUpdate.do',
+		data:'bno=${boardDTO.bno}&content='+$('#updateBoardTitle').val()+'&title='+$('#updateBoardContent').val()+'&writer='+$('#updateBoardWriter').val(),
+		success:board_change,
+	});
+	
+};//end board_update_send()///////////
+
+
+//보드 modify request 함수
+function board_change(res){
+	$('.box-body').empty();
+	var sos = '<div class="form-group"><label for="exampleInputEmail1">Title</label> <input type="text"name="title" class="form-control" value="{{title}}"readonly="readonly"></div><div class="form-group"><label for="exampleInputPassword1">Content</label><textarea class="form-control" name="content" rows="3" readonly="readonly">{{content}}</textarea></div><div class="form-group">	<label for="exampleInputEmail1">Writer</label> <input type="text" name="writer" class="form-control" value="{{writer}}" readonly="readonly"></div>';
+	var temp=Handlebars.compile(sos);
+	$('.box-body').append(temp(res));
+	$('#boardModifyModal').addClass('modifyHide');
+	
+};//end board_change()///////
+
+
 </script>
 </head>
 <body>
@@ -217,8 +282,8 @@ function reply_update_send(){
 
 		<div class="box-footer">
 			<button type="submit" class="btn btn-warning" id="modifyBtn">Modify</button>
-			<button type="submit" class="btn btn-danger" id="removeBtn">REMOVE</button>
-			<button type="submit" class="btn btn-primary" id="goListBtn">GO
+			<button type="submit" class="btn btn-danger" id="removeBtn" >REMOVE</button>
+			<button type="submit" class="btn btn-primary" id="goListBtn" onclick="location.href='boardlist.do'">GO
 				LIST</button>
 		</div>
 		<hr />
@@ -227,7 +292,7 @@ function reply_update_send(){
 			<div class="box-header">
 				<h3 class="box-title">ADD NEW REPLY</h3>
 			</div>
-			<div class="box-body">
+			<div class="box-body2">
 				<label for="exampleInputEmail1">Writer</label> <input
 					class="form-control" type="text" placeholder="USER ID"
 					id="newReplyWriter"> <label for="exampleInputEmail1">Reply
@@ -260,7 +325,7 @@ function reply_update_send(){
 					<p><fmt:formatDate pattern="yyyy/MM/dd" dateStyle="short" value="${replyDTO.regdate}"/></p>
 					<c:choose>
 					<c:when test="${replyDTO.rupload!=null}">
-					<a href="contentdownload.do?rno=${replyDTO.rno}">${fn:substringAfter(replyDTO.rupload,"_")}</a>
+						<img src="images/save.gif" /><a href="contentdownload.do?rno=${replyDTO.rno}">${fn:substringAfter(replyDTO.rupload,"_")}</a>
 					</c:when>
 					<c:otherwise>
 					<p>첨부파일 없음</p>
@@ -294,10 +359,27 @@ function reply_update_send(){
 			<p>			    
 				<button id="btnModify">Modify</button>
 				<button id="btnClose">Close</button>
-				
-			
 			</p>
 		</div>
+		
+		<!--  board Modal -->
+		<div id="boardModifyModal">
+			<p>
+				<label for="updateBoardTitle">Title</label> <input
+					class="form-control" type="text" placeholder="title"
+					id="updateBoardTitle"/><br/>
+				<label for="updateBoardContent">Content</label> 
+				<textarea class="form-control" id="updateBoardContent" rows="3" placeholder="Content"></textarea><br/>
+				<label for="updateBoardWriter">Writer</label> <input
+					class="form-control" type="text" placeholder="Writer"
+					id="updateBoardWriter"/>
+			</p>
+			<p>			    
+				<button id="boardbtnModify">Modify</button>
+				<button id="boardbtnClose">Close</button>
+			</p>
+		</div>
+		
 
 	</div>
 </body>

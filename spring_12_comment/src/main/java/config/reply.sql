@@ -35,6 +35,8 @@ nocycle;
 
 insert into TBL_BOARD values(board_bno_seq.nextval,'리스트1','내용1','미상',sysdate,0);
 insert into TBL_BOARD values(board_bno_seq.nextval,'리스트2','내용2','미상2',sysdate,0);
+insert into TBL_BOARD values(board_bno_seq.nextval,'리스트3','내용3','미상3',sysdate,0);
+insert into TBL_BOARD values(board_bno_seq.nextval,'리스트4','내용4','미상4',sysdate,0);
 select * from tbl_board;
 
 insert into tbl_reply values(reply_rno_seq.nextval,1,'댓글내용1','kim',sysdate);
@@ -46,4 +48,5 @@ select b.*, r.* from tbl_board b, tbl_reply r where b.bno=r.bno and b.bno=1;
 
 alter table tbl_reply add rupload varchar2(1000)
 
+select rno from TBL_REPLY where bno=3;
 

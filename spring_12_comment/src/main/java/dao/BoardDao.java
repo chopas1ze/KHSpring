@@ -13,4 +13,13 @@ public interface BoardDao {
 	public void replyDeleteMethod(int rno);
 	public void replyUpdateMethod(ReplyDTO rdto);
 	public String replyUploadMethod(int rno);
+	
+	
+	/////////////////////////////////수정본///////////////////////////
+	
+	public void boardDeleteMethod(int bno);
+	public void boardCntMethod(int bno);
+	public void boardUptMethod(BoardDTO bdto);
+	public BoardDTO boardMethod(int bno);
+	public void boardInsertMethod(BoardDTO bdto);
 }// end class

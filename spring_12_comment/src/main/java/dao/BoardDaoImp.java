@@ -51,4 +51,32 @@ public class BoardDaoImp implements BoardDao {
 	public String replyUploadMethod(int rno) {
 		return sqlSession.selectOne("reply.r_uploadname",rno);
 	}
+	
+	
+	///////////////////////////////수정본////////////////////////////
+	
+	@Override
+	public void boardDeleteMethod(int bno) {
+		 	sqlSession.delete("board.b_delete",bno);
+	};
+	
+	@Override
+	public void boardCntMethod(int bno) {
+		sqlSession.update("board.b_viewcnt",bno);
+	};
+	
+	@Override
+	public void boardUptMethod(BoardDTO bdto) {
+		sqlSession.update("board.b_upt",bdto);
+	};
+	
+	@Override
+	public BoardDTO boardMethod(int bno) {
+		return sqlSession.selectOne("board.b_change",bno);
+	}
+	
+	@Override
+	public void boardInsertMethod(BoardDTO bdto) {
+		sqlSession.insert("board.b_ins",bdto);
+	}
 }//end class

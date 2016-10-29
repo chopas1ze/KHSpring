@@ -11,6 +11,7 @@
 </head>
 <body>
 	<div id="wrap">
+		<a href="boardInsert.do">글쓰기</a>
 		<table>
 			<tr>
 				<th>BNO</th>
@@ -25,7 +26,7 @@
 					<td><a href="boardView.do?bno=${boardDTO.bno}">${boardDTO.title}</a></td>
 					<td>${boardDTO.writer}</td>
 					<td><fmt:formatDate pattern="yyyy/MM/dd" dateStyle="short" value="${boardDTO.regdate}"/></td>
-					<td>${boardDTO.viewcnt}</td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${boardDTO.viewcnt}</td>
 				</tr>
 
 			</c:forEach>
