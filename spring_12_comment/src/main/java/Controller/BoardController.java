@@ -32,6 +32,7 @@ public class BoardController {
 	public void setService(BoardService service) {
 		this.service = service;
 	};
+	
 	@RequestMapping(value = "/boardlist.do", method = RequestMethod.GET)
 	public ModelAndView boardListPage(){
 		ModelAndView mav = new ModelAndView();
@@ -46,7 +47,8 @@ public class BoardController {
 		mav.addObject("boardDTO", service.boardViewProcess(bno));
 		//mav.setViewName("boardView");
 		//mav.setViewName("boardView2");
-		mav.setViewName("boardView3");
+		//mav.setViewName("boardView3");
+		mav.setViewName("boardView4");
 		return mav;
 	};//end readPage()
 	
