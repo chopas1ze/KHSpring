@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+		
+		
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin://@127.0.0.1:1521:xe" />
+		<property name="username" value="hr" />
+		<property name="password" value="a1234" />
+	</bean>
+
+<bean class="part01.controller.HomeController"/>
+<bean class="part02.controller.UserController"/>
+<bean class="part02.controller.NoticeController"/>
+<bean class="part02.controller.IndexController"/>
+
+<!-- Spring Framework. 3.1과 3.2의 버전마다 차이가 있는데. 
+	Spring 3.2의 경우는 servlet-context.xml 
+		파일에 다음과 같이 설정해주면 끝. 
+		하지만 3.1의 경우는 exclude-mapping을 지원해주지 않으므로, Interceptor 
+		클래스에서 별도의 처리를 거쳐주어야 한다. -->
+
+
+<!-- interceptor -->
+<mvc:interceptors>
+	<mvc:interceptor>
+		<!-- <mvc:mapping path="/list.do"/>
+		<mvc:mapping path="/view.do"/> -->
+		
+		
+		<mvc:mapping path="/**"/>
+		<!--
+			스프링 3.2 버전이상에서 가능. 		
+		 <mvc:mapping path="/**"/> 
+		<mvc:mapping path="/test**"/>
+		<mvc:exclude-mapping path="/write.do"/> -->
+		<bean class="part01.interceptor.SampleInterceptor"/>
+	</mvc:interceptor>
+	
+	<mvc:interceptor>
+		<mvc:mapping path="/noticeList.do"/>
+		<bean class="part02.interceptor.AuthInterceptor"/>
+	</mvc:interceptor>
+	
+</mvc:interceptors>
+
+<!-- viewResolver -->
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<property name="prefix" value="/WEB-INF/"/>
+<property name="suffix" value=".jsp"/>
+</bean>
+	
+
+</beans>
