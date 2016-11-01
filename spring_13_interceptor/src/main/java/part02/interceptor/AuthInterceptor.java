@@ -14,7 +14,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		
 		String uri=request.getRequestURI();
-		uri=uri.substring(uri.lastIndexOf("/")+1);
+		uri=uri.substring(uri.lastIndexOf("/")+1); 
 		System.out.println("uri:"+uri);
 		
 		

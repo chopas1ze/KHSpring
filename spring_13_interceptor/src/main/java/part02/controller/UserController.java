@@ -24,15 +24,17 @@ public class UserController {
 		
 		if(dto.getId().equals("kim") && dto.getPass().equals("1234")){
 			session.setAttribute("chk", dto.getId());
-			String url = req.getParameter("returnUrl");
-			if(url!=null){
+			String url = req.getParameter("returnUrl");  //getparameter 값이 널이면 공백으로 들어온다.
+			System.out.println("uri="+url);
+			if(url!=""){
 				return "redirect:/"+url;
 			}
 			else{
 				return "redirect:/index.do";
 			}
+			
 		}
-			return "redirect:/login.do";
+			return "redirect:/index.do";
 	}//end logCheckProcess()
 	
 	@RequestMapping("/logout.do")

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="per">
+<select id="all" resultType="dto.PersonDTO">
+select * from person order by num desc
+</select> 
+
+<select id="one" resultType="dto.PersonDTO" parameterType="int">
+select * from person where num=#{num}
+</select>
+
+<select id="search" resultType="dto.PersonDTO" parameterType="dto.PersonDTO">
+select * from person where num=#{num} and name=#{name}
+</select>
+
+<insert id="ins" parameterType="dto.PersonDTO">
+insert into person values(per_num_seq.nextval,#{id},#{pass},#{name})
+</insert>
+
+<update id="upt" parameterType="dto.PersonDTO">
+update person set name=#{name} where num=#{num}
+</update>
+
+<delete id="del" parameterType="int">
+delete from person where num=#{num}
+</delete>
+</mapper>

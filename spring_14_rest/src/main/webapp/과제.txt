@@ -1,0 +1,6 @@
+1 cookie / session
+2 filter / interceptor
+3 mvc패턴
+  모델1, 모델2
+4 REST API
+트랜잭션
