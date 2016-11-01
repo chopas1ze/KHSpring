@@ -1,11 +1,14 @@
 package dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class PersonDTO {
 
 	private int num;
 	private String id;
 	private String pass;
 	private String name;
+	private MultipartFile filename;
 	
 	public PersonDTO() {}
 
@@ -39,6 +42,14 @@ public class PersonDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public MultipartFile getFilename() {
+		return filename;
+	}
+
+	public void setFilename(MultipartFile filename) {
+		this.filename = filename;
 	}
 	
 	
