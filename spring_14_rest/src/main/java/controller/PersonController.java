@@ -31,7 +31,7 @@ POST(/rest/person/)+데이터    		자료의 등록
 PUT(/rest/person/update)+데이터 	자료의 수정  
 
 @PathVariable-URI의 경로에서 원하는 데이터를 추출하는 용도로 사용
-@RequestBody - 전송된 JSON데이터를 객체로 변환해 주는 어노테이션으로 
+@RequestBody - 전송된 JSON데이터를 객체로 변환해 주는 어노테이션
 @ModeAndView와 유사한 역할을 하지만 JSON에서 사용된다는 점이 차이
 */
 
