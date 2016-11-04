@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+<title>Socket.IO chat</title>
+<style>
+* {
+	margin: auto;
+	padding: auto; 
+	box-sizing: border-box;
+}
+
+body {
+	font: 13px Helvetica, Arial;
+	height:500px;
+}
+
+form {
+	background: #0092B3;
+	padding: 2px;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	
+}
+
+form input {
+	border: 0;
+	padding: 10px;
+	width: 91%;
+	margin-right: -0.5%;
+}
+
+form button {
+	width: 9%;
+	background: #0092B3;
+	color:white;
+	border: none;
+	padding: 10px;
+}
+
+
+#messages {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow:auto;
+	height:450px;
+}
+
+#messages li {
+	padding: 5px 10px;
+}
+
+#messages li:nth-child(odd) {
+	
+}
+
+#p{
+	margin: -3px;
+}
+
+</style>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+</head>
+<body >
+	<div id="login" title="닉네임을 설정해주세요!"
+		style="text-align: center; width: 560px;background-color:yellow">
+		
+		<input type="text" id="user" value="">
+		<button id="in">문의하기</button>
+		<br /><br /> 
+		<p>※ 익명성 보장을 위해</p>
+		<p>닉네임을 설정해주세요.</p>
+
+	</div>
+	<div id="msg">
+		<ul id="messages" ></ul>
+		<form action="">
+			<input id="m" autocomplete="off" />
+			<button>Send</button>
+		</form>
+	</div>
+	 <!-- <div class="msg_panel" ></div>  -->
+	<script>
+		$(function() {			
+		$("#login").dialog();
+			$("#msg").css("display", "none");
+
+			var socket = io();
+			var users;
+
+			$("#in").click(function() {
+				users = $("#user").val();
+				socket.emit('join', $("#user").val());
+				$("#login").dialog("close");
+				$("#msg").css("display", "block");
+			});
+
+			$('form').submit(function() {
+				socket.emit('chat message', $('#m').val());
+			
+				$('#m').val('');
+				$('#m').focus();
+				
+				return false;
+			});
+			
+			socket.on('chat message', function(data) {
+				if (users == data.user) {
+					$('#messages').append(
+							'<li style="background: #eee;"><b>' + data.user
+								+ "</b> : " + data.msg);
+				} else {
+					$('#messages').append(
+							'<li><b>' + data.user + "</b> : " + data.msg);
+					
+				}
+				$('#messages').scrollTop($('#messages').height());
+				
+			});
+		
+		});
+	</script>
+	
+</body>
+</html>
